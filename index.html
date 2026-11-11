@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#071b17" />
+  <title>Boundary Club — Franchise Cricket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Boundary Club home"><span class="brand-mark">BC<span>✦</span></span><span>BOUNDARY<span class="brand-light"> CLUB</span><small>FRANCHISE CRICKET</small></span></a>
+      <div class="season-tag"><span class="live-dot"></span> SEASON 01 <i></i> INDIA</div>
+      <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">♫ <span>Sound on</span></button>
+    </header>
+
+    <section class="arena" aria-label="3D cricket stadium">
+      <canvas id="stadiumCanvas" aria-label="Interactive 3D cricket stadium"></canvas>
+      <div class="arena-vignette"></div>
+      <div class="arena-topline"><span class="eyebrow"><span class="live-dot"></span> THE NIGHT LEAGUE</span><span class="drag-hint">↔ DRAG TO ORBIT</span></div>
+      <div class="stadium-label"><span class="label-line"></span><span id="arenaTeamName">YOUR FRANCHISE STARTS HERE</span></div>
+      <div class="stadium-score" id="stadiumScore" hidden><span>LIVE MATCH</span><strong id="arenaScore">0/0</strong><small id="arenaOvers">0.0 OVERS</small></div>
+      <button class="audio-float" id="ambientToggle" aria-label="Toggle ambience">◖))</button>
+    </section>
+
+    <section class="screen welcome-screen active" id="welcomeScreen">
+      <div class="welcome-copy"><div class="eyebrow">YOUR CITY. YOUR CLUB. YOUR CALL.</div><h1>BUILD A<br><em>LEGACY.</em></h1><p>Pick your franchise. Own the auction. Take your squad all the way to the final over.</p><div class="feature-row"><span>✦ 100-PLAYER POOL</span><span>✦ EXPRESS AUCTION</span><span>✦ 3D MATCHDAY</span></div></div>
+      <div class="welcome-action"><button class="primary-button" id="startButton">CHOOSE YOUR FRANCHISE <span>↗</span></button><div class="microcopy">4 FRANCHISES · ONE TROPHY · YOUR STRATEGY</div></div>
+    </section>
+
+    <section class="screen franchise-screen" id="franchiseScreen">
+      <div class="section-heading"><div><div class="eyebrow">STEP 01 / 03 <span class="heading-rule"></span> PICK YOUR SIDE</div><h2>CHOOSE YOUR <em>FRANCHISE</em></h2></div><div class="heading-note">Every club starts with the same purse.<br>Choose the colors you’ll fight for.</div></div>
+      <div class="team-grid" id="teamGrid"></div>
+      <div class="screen-footer"><span>01 — FRANCHISE</span><span>02 — AUCTION</span><span>03 — MATCHDAY</span></div>
+    </section>
+
+    <section class="screen auction-screen" id="auctionScreen">
+      <div class="section-heading auction-heading"><div><div class="eyebrow">STEP 02 / 03 <span class="heading-rule"></span> THE EXPRESS AUCTION</div><h2>BUILD YOUR <em>XI.</em></h2></div><div class="auction-rules">12 headline lots. Quick decisions.<br>Stay under the purse. Build a balanced squad.</div></div>
+      <div class="auction-layout">
+        <div class="auction-main">
+          <div class="auction-progress"><span id="lotLabel">LOT 01 <b>/ 12</b></span><div class="progress-track"><i id="auctionProgress"></i></div><span class="live-pill"><i></i> ON THE BLOCK</span></div>
+          <article class="player-lot" id="playerLot"></article>
+          <div class="auction-actions" id="auctionActions"></div>
+          <div class="auction-feed" id="auctionFeed">Welcome to the express auction. Every credit counts.</div>
+        </div>
+        <aside class="auction-sidebar">
+          <div class="purse-card"><span class="eyebrow">AVAILABLE PURSE</span><div class="purse-amount"><span>₹</span><b id="purseAmount">100</b><small>CR</small></div><div class="purse-track"><i id="purseBar"></i></div><small class="purse-caption">SQUAD CAP <b>5 PLAYERS</b></small></div>
+          <div class="squad-card"><div class="squad-title"><span>YOUR SQUAD</span><span id="squadCount">0 / 5</span></div><div class="squad-list" id="squadList"><div class="empty-squad">Your first signing<br>is waiting out there.</div></div></div>
+          <div class="team-mini-list" id="opponentMiniList"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="screen match-screen" id="matchScreen">
+      <div class="section-heading match-heading"><div><div class="eyebrow"><span class="live-dot"></span> STEP 03 / 03 <span class="heading-rule"></span> MATCHDAY</div><h2 id="matchTitle">LIGHTS. CAMERA. <em>CRICKET.</em></h2></div><div class="match-innings" id="inningsLabel">YOUR INNINGS · 2 OVERS</div></div>
+      <div class="match-layout">
+        <div class="match-main">
+          <div class="scoreboard"><div class="batting-team"><span class="team-crest small-crest" id="scoreCrest">BC</span><span><b id="battingTeamName">YOUR FRANCHISE</b><small id="battingSubtitle">BATTING · INNINGS 1</small></span></div><div class="score-numbers"><strong id="scoreValue">0<span>/0</span></strong><small><b id="overValue">0.0</b> <span>OVERS</span></small></div><div class="target-chip" id="targetChip" hidden><small>TARGET</small><b id="targetValue">24</b></div></div>
+          <div class="over-strip"><span>THIS OVER</span><div id="ballDots" class="ball-dots"></div><span id="ballsLeft">12 BALLS LEFT</span></div>
+          <div class="match-controls" id="matchControls"><div class="match-prompt"><span class="prompt-icon">✦</span><div><b>READY FOR THE FIRST BALL?</b><small>Tap bowl to start. Then time your shot.</small></div></div><button class="primary-button bowl-button" id="bowlButton">BOWL <span>↗</span></button><button class="primary-button hit-button" id="hitButton" hidden>HIT! <span>↗</span></button></div>
+          <div class="timing-meter"><div class="timing-label"><span>SHOT TIMING</span><span id="timingText">WAIT FOR THE DELIVERY</span></div><div class="timing-track"><i class="timing-poor"></i><i class="timing-good"></i><i class="timing-perfect"></i><i class="timing-marker" id="timingMarker"></i></div><div class="timing-zones"><span>EARLY</span><span>GOOD</span><span>PERFECT</span><span>LATE</span></div></div>
+          <div class="match-commentary" id="commentary">The crowd is on its feet. Here we go!</div>
+        </div>
+        <aside class="match-sidebar"><div class="side-card"><div class="side-card-heading">MATCH CENTRE <span>LIVE</span></div><div class="versus-row"><div class="versus-club"><span class="team-crest" id="homeCrest">BC</span><b id="homeTeamName">HOME</b></div><span class="versus">VS</span><div class="versus-club"><span class="team-crest opponent-crest" id="awayCrest">R</span><b id="awayTeamName">AWAY</b></div></div><div class="match-venue">NIGHT LEAGUE STADIUM <span>·</span> FINAL</div><div class="side-divider"></div><div class="side-card-heading">YOUR BATTERS <span>ROSTER</span></div><div class="batter-list" id="batterList"></div></div><div class="tip-card"><span>✧ CAPTAIN'S TIP</span><p>Perfect timing sends it to the boundary. Keep your eyes on the delivery.</p></div></aside>
+      </div>
+    </section>
+
+    <section class="screen result-screen" id="resultScreen">
+      <div class="result-kicker" id="resultKicker">FULL TIME</div><h2 id="resultTitle">WHAT A <em>FINISH.</em></h2><p id="resultSummary">You made your mark.</p><div class="result-scoreline" id="resultScoreline"></div><div class="result-buttons"><button class="primary-button" id="rematchButton">PLAY AGAIN <span>↗</span></button><button class="secondary-button" id="homeButton">NEW FRANCHISE</button></div>
+    </section>
+    <footer class="site-footer"><span>BOUNDARY CLUB <i>✦</i> THE GAME IS YOURS</span><span>DESIGNED FOR THE NEXT GENERATION OF CRICKET</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
